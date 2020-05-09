@@ -6,6 +6,8 @@ function Home() {
 
   const [elements, setElements] = useState([]);
 
+  let createInput;
+
   useEffect(() => {
     read();
   }, []);
@@ -27,6 +29,8 @@ function Home() {
       },
       body: JSON.stringify({ content: event.target[0].value }),
     });
+
+    createInput.value = "";
 
     read();
   };
@@ -68,7 +72,13 @@ function Home() {
         ))}
         <Col sm={6} md={4} lg={3} className="p-2">
           <Form onSubmit={create}>
-            <Form.Control type="text" placeholder="New" />
+            <Form.Control
+              type="text"
+              placeholder="New"
+              ref={(input) => {
+                createInput = input;
+              }}
+            />
           </Form>
         </Col>
       </Row>
