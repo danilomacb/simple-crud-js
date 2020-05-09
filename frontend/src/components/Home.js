@@ -37,12 +37,24 @@ function Home() {
     read();
   };
 
+  const update = (id) => async (event) => {
+    event.preventDefault();
+
+    await fetch(url + id, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ content: event.target[1].value }),
+    });
+  };
+
   return (
     <Container className="mt-5">
       <Row>
         {elements.map((element) => (
           <Col key={element._id} sm={6} md={4} lg={3} className="p-2">
-            <Form>
+            <Form onSubmit={update(element._id)}>
               <InputGroup>
                 <InputGroup.Prepend>
                   <Button variant={"danger"} onClick={() => del(element._id)}>
