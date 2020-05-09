@@ -2,24 +2,40 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Form, InputGroup, Button } from "react-bootstrap";
 
 function Home() {
+  const url = "http://localhost:3001/";
+
   const [elements, setElements] = useState([]);
 
   useEffect(() => {
-    async function getElements() {
-      let elements = await fetch("http://localhost:3001/");
-      elements = await elements.json();
-
-      setElements(elements);
-    }
-
-    getElements();
+    read();
   }, []);
+
+  const read = async () => {
+    let elements = await fetch(url);
+    elements = await elements.json();
+
+    setElements(elements);
+  };
+
+  const create = async (event) => {
+    event.preventDefault();
+
+    await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ content: event.target[0].value }),
+    });
+
+    read();
+  };
 
   return (
     <Container className="mt-5">
       <Row>
         {elements.map((element) => (
-          <Col key={element._id} sm={6} md={4} lg={3}>
+          <Col key={element._id} sm={6} md={4} lg={3} className="p-2">
             <Form>
               <InputGroup>
                 <InputGroup.Prepend>
@@ -30,8 +46,8 @@ function Home() {
             </Form>
           </Col>
         ))}
-        <Col sm={6} md={4} lg={3}>
-          <Form>
+        <Col sm={6} md={4} lg={3} className="p-2">
+          <Form onSubmit={create}>
             <Form.Control type="text" placeholder="New" />
           </Form>
         </Col>
