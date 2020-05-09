@@ -31,6 +31,12 @@ function Home() {
     read();
   };
 
+  const del = async (id) => {
+    await fetch(url + id, { method: "DELETE" });
+
+    read();
+  };
+
   return (
     <Container className="mt-5">
       <Row>
@@ -39,7 +45,9 @@ function Home() {
             <Form>
               <InputGroup>
                 <InputGroup.Prepend>
-                  <Button variant={"danger"}>X</Button>
+                  <Button variant={"danger"} onClick={() => del(element._id)}>
+                    X
+                  </Button>
                 </InputGroup.Prepend>
                 <Form.Control type="text" defaultValue={element.content} />
               </InputGroup>
