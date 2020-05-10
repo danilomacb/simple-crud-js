@@ -46,9 +46,14 @@ function Home() {
   };
 
   const del = async (id) => {
-    await fetch(url + id, { method: "DELETE" });
+    try {
+      await fetch(url + id, { method: "DELETE" });
 
-    read();
+      read();
+    } catch (err) {
+      alert("Error on delete element");
+      return console.error("Error on delete element: ", err);
+    }
   };
 
   const update = (id) => async (event) => {
