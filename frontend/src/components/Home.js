@@ -59,13 +59,18 @@ function Home() {
   const update = (id) => async (event) => {
     event.preventDefault();
 
-    await fetch(url + id, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ content: event.target[1].value }),
-    });
+    try {
+      await fetch(url + id, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ content: event.target[1].value }),
+      });
+    } catch (err) {
+      alert("Error on update element");
+      return console.error("Error on update element: ", err);
+    }
   };
 
   return (
