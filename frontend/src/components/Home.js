@@ -60,13 +60,15 @@ function Home() {
     event.preventDefault();
 
     try {
-      await fetch(url + id, {
+      const response = await fetch(url + id, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ content: event.target[1].value }),
       });
+
+      if (response.ok) alert("Update succeeded");
     } catch (err) {
       alert("Error on update element");
       return console.error("Error on update element: ", err);
