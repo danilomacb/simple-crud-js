@@ -13,10 +13,15 @@ function Home() {
   }, []);
 
   const read = async () => {
-    let elements = await fetch(url);
-    elements = await elements.json();
+    try {
+      let elements = await fetch(url);
+      elements = await elements.json();
 
-    setElements(elements);
+      return setElements(elements);
+    } catch (err) {
+      alert("Error on read elements");
+      return console.error("Error on read elements: ", err);
+    }
   };
 
   const create = async (event) => {
