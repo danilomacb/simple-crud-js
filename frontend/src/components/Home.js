@@ -27,17 +27,22 @@ function Home() {
   const create = async (event) => {
     event.preventDefault();
 
-    await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ content: event.target[0].value }),
-    });
+    try {
+      await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ content: event.target[0].value }),
+      });
 
-    createInput.value = "";
+      createInput.value = "";
 
-    read();
+      read();
+    } catch (err) {
+      alert("Error on create element");
+      return console.error("Error on create element: ", err);
+    }
   };
 
   const del = async (id) => {
