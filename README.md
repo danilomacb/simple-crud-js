@@ -1,10 +1,10 @@
 # About
 
-Simple CRUD (Create, Read, Update, and Delete), is a project used as a reference to understand some concepts in different technologies.
+Simple CRUD (Create, Read, Update, and Delete), a project used as a reference.
 
 # Another Simple CRUD project
 
-[simple-crud-typescript-node-react-mongo](https://github.com/danilomacb/simple-crud-typescript-node-react-mongo)
+[simple-crud-ts](https://github.com/danilomacb/simple-crud-ts)
 
 # Technologies
 
